@@ -9,104 +9,171 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
+
     <header class="site-header">
         <div class="container">
             <a href="#profile" class="brand">Aisha</a>
 
             <nav>
-                <a href="#profile">Profile</a>
+                <a href="#profile">About</a>
+                <a href="#experience">Experience</a>
             </nav>
         </div>
     </header>
 
     <main>
-    <section class="hero" id="profile">
-        <div class="container hero-grid">
 
-            <div class="hero-identity">
-                <p class="hero-kicker">
-                    Computer Science &middot; Universitas Indonesia
-                </p>
-                <h1>Aisha Ibnaty Zahira</h1>
-            </div>
+        <section class="hero" id="profile">
+            <div class="container hero-grid">
 
-            <div class="hero-photo">
-                <div class="photo-block"></div>
-                <img
-                    class="avatar"
-                    src="/static/img/new.jpeg"
-                    alt="Photo of Aisha">
-            </div>
-
-            <div class="hero-details">
-                <p class="bio">
-                    Second-year Information Systems student at the Faculty of Computer Science,
-                    Universitas Indonesia. Most of my days are spent between classes and student
-                    committees, just figuring things out along the way.
-                </p>
-
-                <dl class="meta-list">
-                    <div class="meta-row">
-                        <dt>NPM</dt>
-                        <dd>2506624726</dd>
-                    </div>
-
-                    <div class="meta-row">
-                        <dt>Program</dt>
-                        <dd>S1 Sistem Informasi</dd>
-                    </div>
-                </dl>
-
-                <div class="social-links">
-                    <a href="https://github.com/aishazahiraa" class="social-link">GitHub</a>
-                    <a href=https://www.linkedin.com/in/aisha-ibnaty-zahira-296622379/ class="social-link">LinkedIn</a>
-                    <a href="mailto:zahiraaisha07@gmail.com" class="social-link">Email</a>
+                <div class="hero-identity">
+                    <p class="hero-kicker">
+                        Computer Science &middot; Universitas Indonesia
+                    </p>
+                    <h1>Aisha Ibnaty Zahira</h1>
                 </div>
-            </div>
 
-        </div>
-    </section>
-    <section class="experience">
+                <div class="hero-photo">
+                    <div class="photo-block"></div>
+                    <img
+                        class="avatar"
+                        src="/static/img/new.jpeg"
+                        alt="Photo of Aisha">
+                </div>
+
+                <div class="hero-details">
+                    <p class="bio">
+                        Second-year Information Systems student at the Faculty of Computer Science,
+                        Universitas Indonesia. Most of my days are spent between classes and student
+                        committees, just figuring things out along the way.
+                    </p>
+
+                    <dl class="meta-list">
+                        <div class="meta-row">
+                            <dt>NPM</dt>
+                            <dd>2506624726</dd>
+                        </div>
+
+                        <div class="meta-row">
+                            <dt>Program</dt>
+                            <dd>S1 Sistem Informasi</dd>
+                        </div>
+                    </dl>
+
+                    <div class="social-links">
+                        <a href="https://github.com/aishazahiraa" class="social-link github-link">
+                            <i class="fa-brands fa-github"></i>
+                            GitHub
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/aisha-ibnaty-zahira-296622379/" class="social-link linkedin-link">
+                            <i class="fa-brands fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+
+                        <a href="mailto:zahiraaisha07@gmail.com" class="social-link email-link">
+                            <i class="fa-regular fa-envelope"></i>
+                            Email
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="experience" id="experience">
     <h2>Experience</h2>
 
     <div class="experience-container">
+
         <div class="experience-card">
-            <h3>Anggota Biro PSDM</h3>
-            <h4>BEM Fasilkom UI</h4>
+            <div class="experience-header">
+                <div>
+                    <h3>BEM Fasilkom UI</h3>
+                    <h4>Anggota Biro PSDM</h4>
+                </div>
+                <span class="experience-year">2026 - Sekarang</span>
+            </div>
+
             <p>Berkontribusi dalam kegiatan pengembangan dan pengelolaan sumber daya manusia di BEM Fasilkom UI.</p>
+
+            <div class="experience-tags">
+                <span>Organization</span>
+                <span>Human Resource</span>
+            </div>
         </div>
 
+
         <div class="experience-card">
-            <h3>Staff Media Partner</h3>
-            <h4>COMPFEST</h4>
+            <div class="experience-header">
+                <div>
+                    <h3>COMPFEST</h3>
+                    <h4>Staff Media Partner</h4>
+                </div>
+                <span class="experience-year">2026</span>
+            </div>
+
             <p>Bertanggung jawab dalam menjalin dan mengelola kerja sama dengan media partner untuk mendukung publikasi COMPFEST.</p>
+
+            <div class="experience-tags">
+                <span>Event</span>
+                <span>Media Relations</span>
+            </div>
         </div>
 
+
         <div class="experience-card">
-            <h3>Staff Media Partner</h3>
-            <h4>UIIW</h4>
+            <div class="experience-header">
+                <div>
+                    <h3>UIIW</h3>
+                    <h4>Staff Media Partner</h4>
+                </div>
+                <span class="experience-year">2026</span>
+            </div>
+
             <p>Berkontribusi dalam menjalin kerja sama dengan media partner untuk mendukung publikasi dan promosi kegiatan UIIW.</p>
+
+            <div class="experience-tags">
+                <span>Event</span>
+                <span>Media Relations</span>
+            </div>
         </div>
 
+
         <div class="experience-card">
-            <h3>Anggota Human Resources</h3>
-            <h4>BETIS Fasilkom UI</h4>
+            <div class="experience-header">
+                <div>
+                    <h3>BETIS Fasilkom UI</h3>
+                    <h4>Anggota Human Resources</h4>
+                </div>
+                <span class="experience-year">2026</span>
+            </div>
+
             <p>Berkontribusi dalam kegiatan internal organisasi serta pengembangan dan pengelolaan anggota BETIS Fasilkom UI.</p>
+
+            <div class="experience-tags">
+                <span>Organization</span>
+                <span>Human Resource</span>
+            </div>
         </div>
 
     </div>
 </section>
 
-</main>
+    </main>
 
     <footer class="site-footer">
         <div class="container">
             <p>&copy; 2026 Aisha Ibnaty Zahira. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
+
 </body>
 </html>

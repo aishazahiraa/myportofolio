@@ -230,3 +230,206 @@ h1, .brand {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== NAVBAR ===== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fffaf5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #1d1d1d;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 30px;
+}
+
+.site-header nav a {
+    text-decoration: none;
+    color: #1d1d1d;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.site-header nav a:hover {
+    color: #e85d2a;
+}
+
+/* ===== EXPERIENCE CARD ===== */
+
+.experience-card {
+    border-left: 5px solid #e85d2a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+/* ===== SOCIAL BUTTON HOVER ===== */
+
+.social-link {
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    background-color: #e85d2a;
+    color: white;
+}
+
+/* ===== EXPERIENCE CARD DETAILS ===== */
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.experience-header h3 {
+    margin: 0 0 5px 0;
+}
+
+.experience-header h4 {
+    margin: 0;
+}
+
+.experience-year {
+    font-size: 13px;
+    color: #777;
+    white-space: nowrap;
+}
+
+.experience-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.experience-tags span {
+    background: #fff0e8;
+    color: #d9532b;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.experience-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== SOCIAL BUTTONS ===== */
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 18px;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+
+    background-color: white;
+    color: #1d1d1d;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.social-icon {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* GitHub: baru oranye saat disentuh mouse */
+.github-link:hover {
+    background-color: #ff6fb5;
+    border-color: #ff6fb5;
+    color: white;
+}
+
+/* LinkedIn: baru biru saat disentuh mouse */
+.linkedin-link:hover {
+    background-color: #0a66c2;
+    border-color: #0a66c2;
+    color: white;
+}
+
+/* Email: baru gelap saat disentuh mouse */
+.email-link:hover {
+    background-color: #333333;
+    border-color: #333333;
+    color: white;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== FINAL SOCIAL BUTTON FIX ===== */
+
+/* Kondisi normal: SEMUA PUTIH */
+.github-link,
+.linkedin-link,
+.email-link {
+    background-color: white !important;
+    color: #1d1d1d !important;
+    border-color: #d6d6d6 !important;
+}
+
+/* GitHub baru oranye saat mouse diarahkan */
+.github-link:hover {
+    background-color: #ff6fb5 !important;
+    color: white !important;
+    border-color: #ff6fb5 !important;
+}
+
+/* LinkedIn baru biru saat mouse diarahkan */
+.linkedin-link:hover {
+    background-color: #0a66c2 !important;
+    color: white !important;
+    border-color: #0a66c2 !important;
+}
+
+/* Email baru gelap saat mouse diarahkan */
+.email-link:hover {
+    background-color: #333333 !important;
+    color: white !important;
+    border-color: #333333 !important;
+}
