@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aisha Ibnaty Zahira - Portfolio</title>
+    <title>{{ name }} - Portofolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +19,11 @@
 
     <header class="site-header">
         <div class="container">
-            <a href="#profile" class="brand">Aisha</a>
+            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
 
             <nav>
-                <a href="#profile">About</a>
-                <a href="#experience">Experience</a>
+                <a href="{% url 'main:show_main' %}">Profile</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
             </nav>
         </div>
     </header>
@@ -37,7 +37,7 @@
                     <p class="hero-kicker">
                         Computer Science &middot; Universitas Indonesia
                     </p>
-                    <h1>Aisha Ibnaty Zahira</h1>
+                    <h1>{{ name }}</h1>
                 </div>
 
                 <div class="hero-photo">
@@ -49,22 +49,17 @@
                 </div>
 
                 <div class="hero-details">
-                    <p class="bio">
-                        Second-year Information Systems student at the Faculty of Computer Science,
-                        Universitas Indonesia. Currently exploring new experiences through academics,
-                        student activities, and collaborative projects. I'll survive the deadlines, 
-                        classes, and all the chaos. Just don't take away my playlist.
-                    </p>
+                    <p class="bio">{{ bio }}</p>
 
                     <dl class="meta-list">
                         <div class="meta-row">
                             <dt>NPM</dt>
-                            <dd>2506624726</dd>
+                            <dd>{{ npm }}</dd>
                         </div>
 
                         <div class="meta-row">
                             <dt>Program</dt>
-                            <dd>S1 Sistem Informasi</dd>
+                            <dd>{{ study_program }}</dd>
                         </div>
                     </dl>
 
@@ -172,7 +167,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2026 Aisha Ibnaty Zahira. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
         </div>
     </footer>
 
