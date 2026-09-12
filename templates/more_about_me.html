@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More About Me</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="more-container">
+
+    <section class="intro-more">
+        <h1>A Little More About Me ♡</h1>
+        <p>Beyond classes and deadlines, here are some things that make me, me.</p>
+    </section>
+
+
+    <!-- HOBBIES -->
+    <section class="section">
+        <h2>♡ My Hobbies</h2>
+        <p>Things I enjoy in my free time.</p>
+
+        <div class="card-container">
+
+            {% for hobby in hobbies %}
+
+            <div class="hobby-card">
+                <div class="icon">
+                    {{ hobby.icon }}
+                </div>
+
+                <h3>{{ hobby.name }}</h3>
+
+                <p>
+                    {{ hobby.description }}
+                </p>
+            </div>
+
+            {% empty %}
+
+            <p>No hobbies added yet.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section class="section">
+        <h2>🎓 My Education</h2>
+        <p>My academic journey so far.</p>
+
+        <div class="education-container">
+
+            {% for education in educations %}
+
+            <div class="education-card">
+
+                <span class="education-year">
+                    {{ education.year }}
+                </span>
+
+                <h3>
+                    {{ education.institution }}
+                </h3>
+
+                <h4>
+                    {{ education.major }}
+                </h4>
+
+                <p>
+                    {{ education.description }}
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <p>No education data added yet.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+
+    <!-- FUN FACTS -->
+    <section class="section">
+
+        <h2>💡 Fun Facts About Me</h2>
+
+        <p>
+            Some random facts you might find interesting.
+        </p>
+
+
+        <div class="funfact-container">
+
+            {% for fact in funfacts %}
+
+            <div class="funfact-card">
+
+                <div class="icon">
+                    {{ fact.icon }}
+                </div>
+
+                <h3>
+                    {{ fact.title }}
+                </h3>
+
+                <p>
+                    {{ fact.description }}
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <p>No fun facts added yet.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>

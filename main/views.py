@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from main.models import Experience
+from .models import Hobby, Education, FunFact
 
 def show_main(request):
     context = {
@@ -21,3 +22,16 @@ def show_experience(request):
     }
 
     return render(request, "experience.html", context)
+
+def more_about_me(request):
+    hobbies = Hobby.objects.all()
+    educations = Education.objects.all()
+    funfacts = FunFact.objects.all()
+
+    context = {
+        'hobbies': hobbies,
+        'educations': educations,
+        'funfacts': funfacts,
+    }
+
+    return render(request, 'more_about_me.html', context)

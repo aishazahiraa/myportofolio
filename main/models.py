@@ -29,3 +29,33 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+    from django.db import models
+
+
+class Hobby(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    icon = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+
+class Education(models.Model):
+    institution = models.CharField(max_length=150)
+    major = models.CharField(max_length=150)
+    year = models.CharField(max_length=50)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.institution
+
+
+class FunFact(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    icon = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.title
