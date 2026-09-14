@@ -473,3 +473,227 @@ h1,
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================
+   MORE ABOUT ME PAGE
+========================= */
+
+.more-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 70px 24px 90px;
+}
+
+.intro-more {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.intro-more h1 {
+    font-size: 48px;
+    color: #2b2325;
+    margin-bottom: 14px;
+}
+
+.intro-more p {
+    font-size: 18px;
+    color: #6d6265;
+}
+
+/* SECTION */
+.section {
+    margin-bottom: 70px;
+}
+
+.section > h2 {
+    font-size: 34px;
+    color: #c98295;
+    margin-bottom: 8px;
+}
+
+.section > p {
+    color: #7a6d71;
+    margin-bottom: 28px;
+    font-size: 16px;
+}
+
+/* =========================
+   HOBBIES
+========================= */
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.hobby-card {
+    background: #fffaf8;
+    border: 1px solid #ecd8de;
+    border-radius: 22px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(201, 130, 149, 0.12);
+    transition: 0.25s ease;
+}
+
+.hobby-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(201, 130, 149, 0.18);
+}
+
+.hobby-card .icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #f7dfe6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+}
+
+.hobby-card h3 {
+    font-size: 21px;
+    color: #2f2729;
+    margin-bottom: 10px;
+}
+
+.hobby-card p {
+    color: #6e6266;
+    line-height: 1.6;
+}
+
+/* =========================
+   EDUCATION
+========================= */
+
+.education-container {
+    position: relative;
+    margin-top: 28px;
+    padding-left: 42px;
+}
+
+.education-container::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dca2b1;
+}
+
+.education-card {
+    position: relative;
+    background: #fff9f8;
+    border: 1px solid #edd9df;
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 18px rgba(201, 130, 149, 0.10);
+}
+
+.education-card::before {
+    content: "";
+    position: absolute;
+    left: -37px;
+    top: 34px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #c98295;
+    border: 4px solid #fff7f5;
+}
+
+.education-year {
+    display: inline-block;
+    background: #f1d4dc;
+    color: #8f4f63;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.education-card h3 {
+    font-size: 24px;
+    color: #2e2527;
+    margin-bottom: 6px;
+}
+
+.education-card h4 {
+    color: #b0647a;
+    margin-bottom: 12px;
+}
+
+.education-card p {
+    color: #6e6266;
+    line-height: 1.7;
+}
+
+/* =========================
+   FUN FACTS
+========================= */
+
+.funfact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.funfact-card {
+    background: #fbe6ec;
+    border-radius: 18px;
+    padding: 26px 22px;
+    min-height: 190px;
+    box-shadow: 0 8px 18px rgba(201, 130, 149, 0.12);
+    transform: rotate(-1deg);
+    transition: 0.25s ease;
+}
+
+.funfact-card:nth-child(even) {
+    background: #fff6f8;
+    transform: rotate(1deg);
+}
+
+.funfact-card:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.funfact-card .icon {
+    font-size: 32px;
+    margin-bottom: 14px;
+}
+
+.funfact-card h3 {
+    font-size: 20px;
+    color: #783e51;
+    margin-bottom: 10px;
+}
+
+.funfact-card p {
+    color: #62575a;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .more-container {
+        padding: 40px 18px 60px;
+    }
+
+    .intro-more h1 {
+        font-size: 36px;
+    }
+
+    .section > h2 {
+        font-size: 28px;
+    }
+
+    .card-container,
+    .funfact-container {
+        grid-template-columns: 1fr;
+    }
+}
