@@ -4,6 +4,7 @@ from django.utils import timezone
 from main.models import Experience
 
 
+
 class MainTest(TestCase):
     def setUp(self):
         self.experience = Experience.objects.create(
@@ -50,3 +51,17 @@ class MainTest(TestCase):
         self.assertFalse(self.experience.is_ongoing)
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
+
+class PortfolioTest(TestCase):
+
+    def test_profile_page(self):
+        response = self.client.get(reverse("main:show_main"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_experience_page(self):
+        response = self.client.get(reverse("main:show_experience"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_more_page(self):
+        response = self.client.get(reverse("main:more_about_me"))
+        self.assertEqual(response.status_code, 200)
