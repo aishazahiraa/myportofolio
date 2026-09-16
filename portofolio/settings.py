@@ -33,6 +33,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "aisha-ibnaty-myportofolio.pws.cs.ui.ac.id"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://aisha-ibnaty-myportofolio.pws.cs.ui.ac.id"
+]
+
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
 

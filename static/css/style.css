@@ -697,3 +697,116 @@ h1,
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== EXPERIENCE FORM ===== */
+
+.experience-form {
+    max-width: 700px;
+    margin-top: 30px;
+    padding: 32px;
+    background: #ffffff;
+    border: 1px solid #e5d8cf;
+    border-radius: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d6ccc5;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #e7a6b6;
+}
+
+.experience-form .button {
+    display: inline-block;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    background: #e7a6b6;
+    color: #111111;
+}
+
+.experience-form .button-secondary {
+    margin-left: 8px;
+    background: #eeeeee;
+}
+
+.form-error {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* ===== ADD EXPERIENCE BUTTON ===== */
+
+.add-experience-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 14px;
+    margin-bottom: 28px;
+    padding: 12px 20px;
+
+    background: #e7a6b6;
+    color: #111111;
+
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+
+    border-radius: 12px;
+
+    transition: 0.2s ease;
+}
+
+.add-experience-btn .plus-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 25px;
+
+    background: #ffffff;
+    border-radius: 50%;
+
+    font-size: 20px;
+    line-height: 1;
+    color: #c98295;
+}
+
+.add-experience-btn:hover {
+    background: #c98295;
+    transform: translateY(-2px);
+}

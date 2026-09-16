@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from main.models import Experience
 from .models import Hobby, Education, FunFact
+from main.forms import ExperienceForm
+from django.core import serializers
+from django.http import HttpResponse
 
 def show_main(request):
     context = {
@@ -35,3 +38,49 @@ def more_about_me(request):
     }
 
     return render(request, 'more_about_me.html', context)
+
+def create_experience(request):
+    form = ExperienceForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Aisha Ibnaty Zahira",
+        "form": form,
+    }
+
+    return render(request, "experience_form.html", context)
+
+def show_json(request):
+    data = Experience.objects.all()
+
+    return HttpResponse(
+        serializers.serialize("json", data),
+        content_type="application/json"
+    )
+
+def show_json_by_id(request, id):
+    data = Experience.objects.filter(pk=id)
+
+    return HttpResponse(
+        serializers.serialize("json", data),
+        content_type="application/json"
+    )
+
+def show_xml(request):
+    data = Experience.objects.all()
+
+    return HttpResponse(
+        serializers.serialize("xml", data),
+        content_type="application/xml"
+    )
+
+def show_xml_by_id(request, id):
+    data = Experience.objects.filter(pk=id)
+
+    return HttpResponse(
+        serializers.serialize("xml", data),
+        content_type="application/xml"
+    )

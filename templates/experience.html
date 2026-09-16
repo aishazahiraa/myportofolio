@@ -1,38 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Experience - {{ name }}</title>
+{% extends 'base.html' %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+{% block meta %}
+<title>Experience - {{ name }}</title>
+{% endblock meta %}
 
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+{% block content %}
+
     
-    <link rel="stylesheet" href="/static/css/style.css?v=2">
-</head>
-
-<body>
-
-    <header class="site-header">
-        <div class="container">
-            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
-
-            <nav>
-                <a href="{% url 'main:show_main' %}">Profile</a>
-                <a href="{% url 'main:show_experience' %}">Experience</a>
-                <a href="{% url 'main:more_about_me' %}">More</a>
-            </nav>
-        </div>
-    </header>
 
     <main>
     <section class="experience-section" id="experience">
         <div class="container">
             <p class="section-kicker">Perjalanan saya sejauh ini</p>
             <h1>Experience</h1>
+            <a href="{% url 'main:create_experience' %}" class="add-experience-btn">
+                <span class="plus-icon">+</span>
+                Add Experience
+            </a>
 
             <div class="experience-grid">
                 {% for experience in experience_list %}
@@ -64,11 +48,4 @@
     </section>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+    {% endblock content %}
