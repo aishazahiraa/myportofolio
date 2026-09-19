@@ -26,3 +26,39 @@ Saya menggunakan ChatGPT sebagai alat bantu untuk memahami instruksi tugas,
 memberikan saran dalam pengembangan HTML dan CSS, membantu apabila ada 
 masalah pada tampilan website, serta membantu proses Git dan deployment. Saya juga
 menggunakan AI untuk meminta saran. Prompt yang saya berikan umumnya berupa pertanyaan mengenai langkah pengerjaan, masalah yang saya temui, dan bagian kode yang ingin diperbaiki. Saran dari AI tetap saya coba, periksa, dan sesuaikan kembali dengan kebutuhan website saya.
+
+### Tugas 2
+
+1. Ketika pengguna membuka suatu URL pada website, Django akan mengecek
+`urls.py` untuk mencari URL yang sesuai.
+
+Setelah ditemukan, Django akan menjalankan fungsi yang ada di `views.py`.
+View kemudian dapat mengambil data yang dibutuhkan dari Model.
+
+Data tersebut lalu dikirim oleh View ke Template dan ditampilkan
+dalam bentuk halaman HTML kepada pengguna.
+
+Secara sederhana, alurnya adalah:
+
+URL → View → Model → View → Template → User
+
+
+2. Data lebih baik disimpan di Model karena lebih mudah untuk ditambah,
+diubah, atau dihapus tanpa harus mengubah kode HTML.
+
+Selain itu, Template hanya bertugas untuk menampilkan data yang
+diberikan oleh View.
+
+Contohnya pada halaman More About Me, data hobbies, education,
+dan fun facts disimpan di database kemudian ditampilkan menggunakan
+loop pada Django Template.
+
+
+3.`makemigrations` digunakan untuk membuat file migration berdasarkan
+perubahan yang kita lakukan pada Model.
+
+Sedangkan `migrate` digunakan untuk menerapkan file migration tersebut
+ke database.
+
+Jadi, `makemigrations` membuat rencana perubahan database,
+sedangkan `migrate` menjalankan perubahan tersebut pada database.

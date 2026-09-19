@@ -45,7 +45,7 @@ class Hobby(models.Model):
 class Education(models.Model):
     institution = models.CharField(max_length=150)
     major = models.CharField(max_length=150)
-    year = models.CharField(max_length=50)
+    year = models.IntegerField()
     description = models.TextField()
 
     def __str__(self):

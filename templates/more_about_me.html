@@ -89,6 +89,10 @@
                     {{ education.description }}
                 </p>
 
+                <a href="{% url 'main:update_education' education.id %}">
+                    Edit
+                </a>
+
             </div>
 
             {% empty %}

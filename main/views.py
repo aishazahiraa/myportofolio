@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from main.models import Experience
 from .models import Hobby, Education, FunFact
-from main.forms import ExperienceForm
+from main.forms import ExperienceForm, EducationForm
 from django.core import serializers
 from django.http import HttpResponse
 
@@ -84,3 +84,36 @@ def show_xml_by_id(request, id):
         serializers.serialize("xml", data),
         content_type="application/xml"
     )
+
+def create_education(request):
+    form = EducationForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("main:more_about_me")
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, "education_form.html", context)
+
+def update_education(request, id):
+    education = Education.objects.get(pk=id)
+    form = EducationForm(request.POST or None, instance=education)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect("main:more_about_me")
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, "education_form.html", context)
+
+def delete_education(request, id):
+    education = Education.objects.get(pk=id)
+    education.delete()
+
+    return redirect("main:more_about_me")
