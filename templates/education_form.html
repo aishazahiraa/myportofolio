@@ -1,21 +1,48 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Education</title>
+    <title>Education Form</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <h1>Add Education</h1>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
+<div class="education-form-page">
 
-        <button type="submit">Save</button>
-    </form>
+    <div class="education-form-card">
 
-    <a href="{% url 'main:more_about_me' %}">Back</a>
+        <h1>Education</h1>
+        <p class="form-subtitle">
+            Add or update your education information.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-fields">
+                {{ form.as_p }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="save-btn">
+                    Save
+                </button>
+
+                <a href="{% url 'main:more_about_me' %}" class="cancel-btn">
+                    Back
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 </html>
