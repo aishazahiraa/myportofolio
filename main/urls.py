@@ -15,7 +15,7 @@ urlpatterns = [
     path("education/<int:id>/edit/", update_education, name="update_education"),
     path("education/<int:id>/delete/", delete_education, name="delete_education"),
     path("json/", show_json, name="show_json"),
-    path("json/<uuid:id>/", show_json_by_id, name="show_json_by_id"),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
     path("xml/", show_xml, name="show_xml"),
-    path("xml/<uuid:id>/", show_xml_by_id, name="show_xml_by_id"),
+    path("xml/<int:id>/", show_xml_by_id, name="show_xml_by_id"),
 ]

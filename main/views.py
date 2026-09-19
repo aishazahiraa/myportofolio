@@ -54,7 +54,7 @@ def create_experience(request):
     return render(request, "experience_form.html", context)
 
 def show_json(request):
-    data = Experience.objects.all()
+    data = Education.objects.all()
 
     return HttpResponse(
         serializers.serialize("json", data),
@@ -62,7 +62,7 @@ def show_json(request):
     )
 
 def show_json_by_id(request, id):
-    data = Experience.objects.filter(pk=id)
+    data = Education.objects.filter(pk=id)
 
     return HttpResponse(
         serializers.serialize("json", data),
@@ -70,7 +70,7 @@ def show_json_by_id(request, id):
     )
 
 def show_xml(request):
-    data = Experience.objects.all()
+    data = Education.objects.all()
 
     return HttpResponse(
         serializers.serialize("xml", data),
@@ -78,7 +78,7 @@ def show_xml(request):
     )
 
 def show_xml_by_id(request, id):
-    data = Experience.objects.filter(pk=id)
+    data = Education.objects.filter(pk=id)
 
     return HttpResponse(
         serializers.serialize("xml", data),
