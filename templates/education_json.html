@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Education JSON - {{ name }}</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="more-container">
+
+    <section class="section">
+        <h1>Education Data from JSON</h1>
+
+        <div class="education-container">
+
+            {% for education in educations %}
+
+            <div class="education-card">
+
+                <span class="education-year">
+                    {{ education.fields.year }}
+                </span>
+
+                <h3>
+                    {{ education.fields.institution }}
+                </h3>
+
+                <h4>
+                    {{ education.fields.major }}
+                </h4>
+
+                <p>
+                    {{ education.fields.description }}
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <p>No education data available.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+</div>
+
+{% endblock content %}

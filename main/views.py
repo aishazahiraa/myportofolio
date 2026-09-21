@@ -3,6 +3,7 @@ from main.models import Experience
 from .models import Hobby, Education, FunFact
 from main.forms import ExperienceForm, EducationForm
 from django.core import serializers
+import json
 from django.http import HttpResponse
 
 def show_main(request):
@@ -117,3 +118,13 @@ def delete_education(request, id):
     education.delete()
 
     return redirect("main:more_about_me")
+
+def show_education_from_json(request):
+    json_data = serializers.serialize("json", Education.objects.all())
+    data = json.loads(json_data)
+
+    context = {
+        "educations": data,
+    }
+
+    return render(request, "education_json.html", context)
