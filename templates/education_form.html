@@ -1,22 +1,17 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education Form</title>
+{% block meta %}
+<title>Education Form - {{ name }}</title>
+{% endblock meta %}
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
+{% block content %}
 
 <div class="education-form-page">
 
     <div class="education-form-card">
 
         <h1>Education</h1>
+
         <p class="form-subtitle">
             Add or update your education information.
         </p>
@@ -29,6 +24,7 @@
             </div>
 
             <div class="form-actions">
+
                 <button type="submit" class="save-btn">
                     Save
                 </button>
@@ -36,6 +32,7 @@
                 <a href="{% url 'main:more_about_me' %}" class="cancel-btn">
                     Back
                 </a>
+
             </div>
 
         </form>
@@ -44,5 +41,4 @@
 
 </div>
 
-</body>
-</html>
+{% endblock content %}
