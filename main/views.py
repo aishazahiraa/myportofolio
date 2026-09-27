@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from main.models import Experience
 from .models import Hobby, Education, FunFact
 from main.forms import ExperienceForm, EducationForm
@@ -9,6 +9,9 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+
 
 def register(request):
     form = UserCreationForm(request.POST or None)
@@ -43,8 +46,6 @@ def login_user(request):
         "name": "Aisha Ibnaty Zahira",
         "form": form,
     }
-
-    return render(request, "login.html", context)
 
     return render(request, "login.html", context)
 
@@ -93,7 +94,10 @@ def more_about_me(request):
 
     return render(request, 'more_about_me.html', context)
 
+@login_required(login_url="/login/")
 def create_experience(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     form = ExperienceForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -139,7 +143,11 @@ def show_xml_by_id(request, id):
         content_type="application/xml"
     )
 
+@login_required
 def create_education(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     form = EducationForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -152,7 +160,11 @@ def create_education(request):
 
     return render(request, "education_form.html", context)
 
+@login_required
 def update_education(request, id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     education = Education.objects.get(pk=id)
     form = EducationForm(request.POST or None, instance=education)
 
@@ -166,7 +178,11 @@ def update_education(request, id):
 
     return render(request, "education_form.html", context)
 
+@login_required
 def delete_education(request, id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
     education = Education.objects.get(pk=id)
     education.delete()
 
@@ -181,3 +197,15 @@ def show_education_from_json(request):
     }
 
     return render(request, "education_json.html", context)
+
+@login_required(login_url="/login/")
+def toggle_star(request, experience_id):
+    experience = get_object_or_404(Experience, pk=experience_id)
+
+    if request.method == "POST":
+        if request.user in experience.starred_by.all():
+            experience.starred_by.remove(request.user)
+        else:
+            experience.starred_by.add(request.user)
+
+    return redirect("main:show_experience")
