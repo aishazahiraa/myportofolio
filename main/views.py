@@ -86,10 +86,16 @@ def more_about_me(request):
     educations = Education.objects.all()
     funfacts = FunFact.objects.all()
 
+    is_editor = (
+    request.user.is_authenticated
+    and request.user.groups.filter(name="Editor").exists()
+)
+
     context = {
         'hobbies': hobbies,
         'educations': educations,
         'funfacts': funfacts,
+        "is_editor": is_editor,
     }
 
     return render(request, 'more_about_me.html', context)
@@ -162,7 +168,9 @@ def create_education(request):
 
 @login_required
 def update_education(request, id):
-    if not request.user.is_superuser:
+    is_editor = request.user.groups.filter(name="Editor").exists()
+
+    if not (request.user.is_superuser or is_editor):
         raise PermissionDenied
 
     education = Education.objects.get(pk=id)

@@ -62,3 +62,23 @@ ke database.
 
 Jadi, `makemigrations` membuat rencana perubahan database,
 sedangkan `migrate` menjalankan perubahan tersebut pada database.
+
+
+### Tugas 3
+1. ModelForm mempermudah pembuatan form karena field dapat dibuat langsung berdasarkan model sehingga tidak perlu menulis semuanya secara manual. {% csrf_token %} digunakan untuk melindungi form dari serangan CSRF atau pengiriman request dari pihak yang tidak sah.
+
+2. JSON lebih sering digunakan karena formatnya lebih sederhana, ringan, dan mudah dibaca dibandingkan XML. JSON juga mudah diproses oleh JavaScript sehingga cocok digunakan dalam pengembangan aplikasi web modern.
+
+3. View mengambil data dari database melalui model, lalu data tersebut diubah menjadi format JSON menggunakan serialization sebelum dikirim sebagai response. Serialization diperlukan karena objek model Django tidak dapat langsung dikirim sebagai data JSON.
+
+### Tugas 4
+
+### AI Disclosure
+
+Saya menggunakan ChatGPT untuk membantu memahami instruksi
+Tugas 4, menentukan langkah implementasi autentikasi dan
+otorisasi, serta membantu memeriksa dan memperbaiki kode.
+
+Saya juga menggunakan ChatGPT untuk membantu proses debugging
+dan pengujian fitur. Saran dari AI tetap saya uji dan
+sesuaikan kembali dengan kebutuhan website saya.
