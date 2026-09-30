@@ -1015,3 +1015,121 @@ h1,
     background: rgba(255, 255, 255, 0.25);
     font-size: 0.8rem;
 }
+
+/* toast */
+.toast-component {
+  position: fixed;
+  inset: auto 2rem 2rem auto;
+  margin: 0;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(28, 25, 23, 0.15);
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  color: inherit;
+}
+
+.toast-component:popover-open {
+  display: flex;
+}
+
+.toast-hidden {
+  opacity: 0;
+  transform: translateY(150%);
+  pointer-events: none;
+}
+
+.toast-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+  font-family: "Space Grotesk", -apple-system, sans-serif;
+}
+
+.toast-message {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.toast-success { border-left: 4px solid #22c55e; }
+.toast-error { border-left: 4px solid #b42318; }
+.toast-normal { border-left: 4px solid var(--accent); }
+
+.hide {
+    display: none !important;
+}
+
+/* Experience Modal */
+.experience-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+    margin: 0 !important;
+}
+
+.modal-content {
+    background: var(--paper);
+    width: 100%;
+    max-width: 500px;
+    padding: 28px;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+    width: 100%;
+    padding: 10px 12px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.star-form .button-star {
+    margin-top: 14px;
+    padding: 8px 14px !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 8px !important;
+    background: var(--paper) !important;
+    color: var(--text) !important;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.star-form .button-star.is-starred {
+    background: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
+}

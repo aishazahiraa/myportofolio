@@ -6,8 +6,6 @@
 
 {% block content %}
 
-    
-
     <main>
     <section class="experience-section" id="experience">
         <div class="container">
@@ -15,42 +13,273 @@
             <h1>Experience</h1>
 
             {% if user.is_superuser %}
-                <a href="{% url 'main:create_experience' %}" class="add-experience-btn">
+                <button type="button" class="add-experience-btn" id="openModalBtn">
                     <span class="plus-icon">+</span>
                     Add Experience
-                </a>
+                </button>
             {% endif %}
 
-            <div class="experience-grid">
-                {% for experience in experience_list %}
+            <div class="experience-search">
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="Search experience..."
+                    class="form-input"
+                >
+                </div>
 
-                    <article class="experience-card">
-                        <span class="experience-category">
-                            {{ experience.get_category_display }}
-                        </span>
-
-                        <h2>{{ experience.title }}</h2>
-                        <p class="experience-description">
-                            {{ experience.description }}
-                        </p>
-
-                        {% if experience.is_ongoing %}
-                            <p class="experience-status">Sedang berlangsung</p>
-                        {% else %}
-                            <p class="experience-status">Selesai</p>
-                        {% endif %}
-
-                        {% include "components/experience_star.html" with experience=experience %}
-
-                    </article>
-                    {% empty %}
-                        <p class="empty-state">
-                            Belum ada pengalaman yang ditambahkan.
-                    </p>
-                {% endfor %}
+            <!-- Loading State -->
+            <div id="loading" class="empty-state hide">
+                <p>Memuat experience...</p>
             </div>
+
+            <!-- Error State -->
+            <div id="error" class="empty-state hide">
+                <p>Gagal memuat data experience. Silakan coba lagi.</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty" class="empty-state hide">
+                <p>Belum ada pengalaman yang ditambahkan.</p>
+            </div>
+
+            <!-- Experience Grid -->
+            <div id="grid" class="experience-grid hide"></div>
+                       
         </div>
     </section>
+    <div id="experienceModal" class="experience-modal hide">
+        <div class="modal-content">
+            <h2>Add Experience</h2>
+
+            <form id="experienceForm">
+                {% csrf_token %}
+
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="internship">Internship</option>
+                    <option value="research">Research</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="part-time">Part-time</option>
+                    <option value="full-time">Full-time</option>
+                    <option value="freelance">Freelance</option>
+                </select>
+
+                <label for="thumbnail">Thumbnail URL</label>
+                <input type="url" id="thumbnail" name="thumbnail">
+
+                <div class="modal-actions">
+                    <button type="button" id="closeModalBtn">Cancel</button>
+                    <button type="submit">Add Experience</button>
+                </div>
+            </form>
+        </div>
+    </div>
     </main>
+
+    <script>
+    async function getExperiences() {
+        return fetch("{% url 'main:get_experiences_json' %}")
+            .then((response) => response.json());
+    }
+
+    async function refreshExperiences() {
+        const loading = document.getElementById("loading");
+        const error = document.getElementById("error");
+        const empty = document.getElementById("empty");
+        const grid = document.getElementById("grid");
+
+        loading.classList.remove("hide");
+        error.classList.add("hide");
+        empty.classList.add("hide");
+        grid.classList.add("hide");
+
+        try {
+            const experiences = await getExperiences();
+
+            const searchValue = document.getElementById("search").value.toLowerCase();
+
+            const filteredExperiences = experiences.filter((experience) =>
+                experience.fields.title.toLowerCase().includes(searchValue) ||
+                experience.fields.description.toLowerCase().includes(searchValue)
+            );
+
+            loading.classList.add("hide");
+
+            if (experiences.length === 0) {
+                empty.classList.remove("hide");
+                return;
+            }
+
+            grid.innerHTML = filteredExperiences.map((experience) => `
+                <article class="experience-card">
+                    <span class="experience-category">
+                        ${experience.fields.category}
+                    </span>
+
+                    <h2>${experience.fields.title}</h2>
+
+                    <p class="experience-description">
+                        ${experience.fields.description}
+                    </p>
+
+                    <p class="experience-status">
+                        ${experience.fields.is_ongoing ? "Sedang berlangsung" : "Selesai"}
+                    </p>
+
+                    <form class="star-form" data-experience-id="${experience.pk}">
+                        <button type="submit"
+                                class="button button-star ${experience.fields.is_starred ? "is-starred" : ""}">
+
+                            <span aria-hidden="true">★</span>
+
+                            <span class="star-text">
+                                ${experience.fields.is_starred ? "Unstar" : "Star"}
+                            </span>
+
+                            <span class="star-count">
+                                ${experience.fields.star_count}
+                            </span>
+                        </button>
+                    </form>
+
+                </article>
+            `).join("");
+
+            grid.classList.remove("hide");
+        } catch (err) {
+            loading.classList.add("hide");
+            error.classList.remove("hide");
+        }
+    }
+
+    function debounce(func, delay) {
+        let timeout;
+
+        return function (...args) {
+            clearTimeout(timeout);
+
+            timeout = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    const searchInput = document.getElementById("search");
+
+    searchInput.addEventListener(
+        "input",
+        debounce(() => {
+            refreshExperiences();
+        }, 300)
+    );
+
+    const modal = document.getElementById("experienceModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    if (openModalBtn) {
+        openModalBtn.addEventListener("click", () => {
+            modal.classList.remove("hide");
+        });
+    }
+
+    closeModalBtn.addEventListener("click", () => {
+        modal.classList.add("hide");
+    });
+
+    const experienceForm = document.getElementById("experienceForm");
+
+    experienceForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(experienceForm);
+
+        try {
+            const response = await fetch("{% url 'main:create_experience' %}", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error("Gagal menambahkan experience");
+            }
+
+            experienceForm.reset();
+            modal.classList.add("hide");
+
+            await refreshExperiences();
+
+            showToast(
+                "Berhasil!",
+                "Experience berhasil ditambahkan.",
+                "success"
+            );
+        } catch (error) {
+            showToast(
+                "Gagal!",
+                "Experience gagal ditambahkan.",
+                "error"
+            );
+        }
+    });
+
+    document.getElementById("grid").addEventListener("submit", async (event) => {
+        const form = event.target.closest(".star-form");
+
+        if (!form) return;
+
+        event.preventDefault();
+
+        {% if not user.is_authenticated %}
+            window.location.href = "{% url 'main:login' %}";
+            return;
+        {% endif %}
+
+        const experienceId = form.dataset.experienceId;
+        const csrfToken = document.querySelector(
+            "[name=csrfmiddlewaretoken]"
+        ).value;
+
+        try {
+            const response = await fetch(
+                `/experience/${experienceId}/star/`,
+                {
+                    
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": csrfToken,
+                    },
+                }
+            );
+
+            if (response.redirected) {
+                window.location.href = response.url;
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error("Gagal mengubah star");
+            }
+
+            await refreshExperiences();
+
+        } catch (error) {
+            showToast(
+                "Gagal!",
+                "Star gagal diperbarui.",
+                "error"
+            );
+        }
+    });
+
+    refreshExperiences();
+    </script>
 
     {% endblock content %}

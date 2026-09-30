@@ -4,13 +4,14 @@ from .models import Hobby, Education, FunFact
 from main.forms import ExperienceForm, EducationForm
 from django.core import serializers
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.views.decorators.http import require_POST
 
 
 def register(request):
@@ -76,10 +77,42 @@ def show_main(request):
 def show_experience(request):
     context = {
         "name": "Aisha Ibnaty Zahira",
-        "experience_list": Experience.objects.all(),
     }
 
     return render(request, "experience.html", context)
+
+def get_experiences_json(request):
+    experiences = Experience.objects.prefetch_related("starred_by").all()
+
+    data = []
+
+    for experience in experiences:
+        starred_users = experience.starred_by.all()
+
+        is_starred = (
+            request.user in starred_users
+            if request.user.is_authenticated
+            else False
+        )
+
+        starred_by_names = ", ".join(
+            [user.username for user in starred_users]
+        )
+
+        data.append({
+            "pk": str(experience.id),
+            "fields": {
+                "title": experience.title,
+                "description": experience.description,
+                "category": experience.get_category_display(),
+                "thumbnail": experience.thumbnail,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 def more_about_me(request):
     hobbies = Hobby.objects.all()
@@ -101,6 +134,7 @@ def more_about_me(request):
     return render(request, 'more_about_me.html', context)
 
 @login_required(login_url="/login/")
+@require_POST
 def create_experience(request):
     if not request.user.is_superuser:
         raise PermissionDenied
@@ -207,13 +241,18 @@ def show_education_from_json(request):
     return render(request, "education_json.html", context)
 
 @login_required(login_url="/login/")
+@require_POST
 def toggle_star(request, experience_id):
     experience = get_object_or_404(Experience, pk=experience_id)
 
-    if request.method == "POST":
-        if request.user in experience.starred_by.all():
-            experience.starred_by.remove(request.user)
-        else:
-            experience.starred_by.add(request.user)
+    if request.user in experience.starred_by.all():
+        experience.starred_by.remove(request.user)
+        is_starred = False
+    else:
+        experience.starred_by.add(request.user)
+        is_starred = True
 
-    return redirect("main:show_experience")
+    return JsonResponse({
+        "is_starred": is_starred,
+        "star_count": experience.starred_by.count(),
+    })
