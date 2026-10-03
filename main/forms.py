@@ -1,5 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea, Select, URLInput
 from main.models import Experience, Education
+from django.utils.html import strip_tags
 
 
 class ExperienceForm(ModelForm):
@@ -43,6 +44,16 @@ class ExperienceForm(ModelForm):
                 }
             ),
         }
+
+    def clean_title(self):
+        title = self.cleaned_data["title"]
+        return strip_tags(title)
+    
+    def clean_description(self):
+        description = self.cleaned_data["description"]
+        return strip_tags(description)
+
+        
 
 class EducationForm(ModelForm):
     class Meta:

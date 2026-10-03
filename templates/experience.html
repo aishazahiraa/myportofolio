@@ -84,6 +84,12 @@
     </main>
 
     <script>
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text ?? "";
+        return div.innerHTML;
+    }
+
     async function getExperiences() {
         return fetch("{% url 'main:get_experiences_json' %}")
             .then((response) => response.json());
@@ -120,13 +126,13 @@
             grid.innerHTML = filteredExperiences.map((experience) => `
                 <article class="experience-card">
                     <span class="experience-category">
-                        ${experience.fields.category}
+                        ${escapeHtml(experience.fields.category)}
                     </span>
 
-                    <h2>${experience.fields.title}</h2>
+                    <h2>${escapeHtml(experience.fields.title)}</h2>
 
                     <p class="experience-description">
-                        ${experience.fields.description}
+                        ${escapeHtml(experience.fields.description)}
                     </p>
 
                     <p class="experience-status">
@@ -208,7 +214,16 @@
             });
 
             if (!response.ok) {
-                throw new Error("Gagal menambahkan experience");
+                const errorData = await response.json();
+
+                let errorMessage = errorData.message || "Gagal menambahkan experience.";
+
+                if (errorData.errors) {
+                    const validationErrors = Object.values(errorData.errors).flat();
+                    errorMessage = validationErrors.join(" ");
+                }
+
+                throw new Error(errorMessage);
             }
 
             experienceForm.reset();
@@ -224,7 +239,7 @@
         } catch (error) {
             showToast(
                 "Gagal!",
-                "Experience gagal ditambahkan.",
+                error.message,
                 "error"
             );
         }

@@ -137,19 +137,33 @@ def more_about_me(request):
 @require_POST
 def create_experience(request):
     if not request.user.is_superuser:
-        raise PermissionDenied
-    form = ExperienceForm(request.POST or None)
+        return JsonResponse(
+            {"success": False, "message": "Anda tidak memiliki izin untuk menambahkan experience."},
+            status=403
+        )
 
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        return redirect("main:show_experience")
+    form = ExperienceForm(request.POST)
 
-    context = {
-        "name": "Aisha Ibnaty Zahira",
-        "form": form,
-    }
+    if form.is_valid():
+        experience = form.save()
 
-    return render(request, "experience_form.html", context)
+        return JsonResponse(
+            {
+                "success": True,
+                "message": "Experience berhasil ditambahkan.",
+                "id": str(experience.id),
+            },
+            status=201
+        )
+
+    return JsonResponse(
+        {
+            "success": False,
+            "message": "Data yang dimasukkan tidak valid.",
+            "errors": form.errors,
+        },
+        status=400
+    )
 
 def show_json(request):
     data = Education.objects.all()
