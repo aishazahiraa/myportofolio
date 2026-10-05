@@ -23,6 +23,5 @@ urlpatterns = [
     path("login/", login_user, name="login"),
     path("logout/", logout_user, name="logout"),
     path("experience/<uuid:experience_id>/star/", toggle_star, name="toggle_star",),
-    path("experience/", show_experience, name="show_experience"),
     path("api/experiences/", get_experiences_json, name="get_experiences_json"),
 ]
