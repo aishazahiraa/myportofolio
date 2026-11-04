@@ -91,9 +91,28 @@
     }
 
     async function getExperiences() {
-        return fetch("{% url 'main:get_experiences_json' %}")
-            .then((response) => response.json());
+    const response = await fetch("/api/v1/experiences/");
+
+    if (!response.ok) {
+        throw new Error("Gagal mengambil data experience");
     }
+
+    const data = await response.json();
+
+    return data.map(experience => ({
+        pk: experience.id,
+        fields: {
+            title: experience.title,
+            description: experience.description,
+            category: experience.category,
+            thumbnail: experience.thumbnail,
+            is_ongoing: experience.is_ongoing,
+            star_count: experience.star_count,
+            is_starred: experience.is_starred,
+            starred_by_names: experience.starred_by_names
+        }
+    }));
+}
 
     async function refreshExperiences() {
         const loading = document.getElementById("loading");
@@ -208,18 +227,27 @@
         const formData = new FormData(experienceForm);
 
         try {
-            const response = await fetch("{% url 'main:create_experience' %}", {
+            const response = await fetch("/api/v1/experiences/", {
                 method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "X-CSRFToken": document.querySelector(
+                        "[name=csrfmiddlewaretoken]"
+                    ).value
+                },
                 body: formData,
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
 
-                let errorMessage = errorData.message || "Gagal menambahkan experience.";
+                let errorMessage = errorData.detail || "Gagal menambahkan experience.";
 
-                if (errorData.errors) {
-                    const validationErrors = Object.values(errorData.errors).flat();
+                const validationErrors = Object.values(errorData)
+                    .flat()
+                    .filter(value => typeof value === "string");
+
+                if (validationErrors.length > 0) {
                     errorMessage = validationErrors.join(" ");
                 }
 
@@ -264,7 +292,7 @@
 
         try {
             const response = await fetch(
-                `/experience/${experienceId}/star/`,
+                `/api/v1/experiences/${experienceId}/star/`,
                 {
                     
                     method: "POST",
