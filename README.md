@@ -89,3 +89,13 @@ sesuaikan kembali dengan kebutuhan website saya.
 2. await digunakan untuk menunggu proses fetch() selesai sebelum kode selanjutnya dijalankan. Tanpa await, kode dapat berjalan sebelum data dari server selesai diterima.
 
 3. XSS (Cross-Site Scripting) adalah serangan dengan menyisipkan script berbahaya ke website. Data dari AJAX lebih rentan karena dimasukkan melalui JavaScript, sehingga perlu diamankan dengan escapeHtml dan strip_tags.
+
+### Tugas 6
+
+1. REST adalah konsep API yang menggunakan HTTP method dan status code sesuai fungsinya, bukan hanya menghasilkan JSON. PUT digunakan untuk mengubah seluruh data, sedangkan PATCH hanya mengubah sebagian data, misalnya judul experience.
+
+2. Serializer pada DRF berfungsi mengubah data menjadi JSON sekaligus memvalidasi input. Dibandingkan JsonResponse manual, serializer membuat kode lebih rapi, praktis, dan mudah dikelola.
+
+3. Autentikasi memastikan identitas pengguna, sedangkan otorisasi menentukan hak aksesnya. Permission harus diperiksa di server karena menyembunyikan tombol saja tidak mencegah pengguna mengakses API secara langsung.
+
+4. Token CSRF melindungi request yang mengubah data dari penyalahgunaan sesi login. force_authenticate tidak menguji CSRF, sehingga perlu APIClient dengan enforce_csrf_checks=True dan login() untuk memastikan request tanpa token ditolak.
