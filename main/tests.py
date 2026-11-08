@@ -36,7 +36,7 @@ class MainTest(TestCase):
         self.assertTemplateUsed(response, "experience.html")
         self.assertContains(response, 'id="grid"')
         self.assertContains(response, 'id="search"')
-        self.assertContains(response, reverse("main:get_experiences_json"))
+        self.assertContains(response, reverse("api:experience-list"))
         self.assertContains(response, f'href="{reverse("main:show_main")}"')
 
     def test_empty_experience_page(self):
@@ -50,15 +50,15 @@ class MainTest(TestCase):
 
         self.assertFalse(self.experience.is_ongoing)
 
-        esponse = self.client.get(
-            reverse("main:get_experiences_json")
+        response = self.client.get(
+            reverse("api:experience-list")
         )
 
         self.assertEqual(response.status_code, 200)
 
         data = response.json()
 
-        self.assertFalse(data[0]["fields"]["is_ongoing"])
+        self.assertFalse(data[0]["is_ongoing"])
 
 class PortfolioTest(TestCase):
 

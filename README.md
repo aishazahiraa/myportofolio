@@ -82,3 +82,10 @@ otorisasi, serta membantu memeriksa dan memperbaiki kode.
 Saya juga menggunakan ChatGPT untuk membantu proses debugging
 dan pengujian fitur. Saran dari AI tetap saya uji dan
 sesuaikan kembali dengan kebutuhan website saya.
+
+### Tugas 5
+1. Debouncing adalah teknik memberi jeda sebelum menjalankan fungsi. Pada AJAX, debouncing berguna agar request pencarian tidak dikirim setiap kali pengguna mengetik sehingga lebih efisien.
+
+2. await digunakan untuk menunggu proses fetch() selesai sebelum kode selanjutnya dijalankan. Tanpa await, kode dapat berjalan sebelum data dari server selesai diterima.
+
+3. XSS (Cross-Site Scripting) adalah serangan dengan menyisipkan script berbahaya ke website. Data dari AJAX lebih rentan karena dimasukkan melalui JavaScript, sehingga perlu diamankan dengan escapeHtml dan strip_tags.
